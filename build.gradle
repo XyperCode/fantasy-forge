@@ -83,8 +83,7 @@ dependencies {
   mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
   forge "net.minecraftforge:forge:${forge_version}"
 
-  modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-api:0.91.0+1.10.8+1.20.1")
-  modRuntimeOnly("dev.su5ed.sinytra.fabric-api:fabric-api:0.91.0+1.10.8+1.20.1")
+  modApi("dev.su5ed.sinytra.fabric-api:fabric-api:0.91.0+1.10.8+1.20.1")
 
   modLocalRuntime "eu.pb4:polymer-reg-sync-manipulator:0.5.5+1.20.1"
 
