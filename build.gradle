@@ -1,5 +1,6 @@
 plugins {
-  id 'fabric-loom' version '1.1.+'
+  id "architectury-plugin" version "3.4-SNAPSHOT"
+  id "dev.architectury.loom" version "1.4-SNAPSHOT"
   id 'maven-publish'
 }
 
@@ -19,43 +20,85 @@ sourceSets {
 }
 
 loom {
+  accessWidenerPath = file("src/main/resources/fantasy.accesswidener")
+
+  forge {
+    convertAccessWideners = true
+    extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+    mixinConfigs = [
+      "fantasy.mixins.json"
+    ]
+  }
+
   runs {
     testmodClient {
       client()
       name = "Testmod Client"
       source sourceSets.testmod
+      mods {
+        testmod {
+          source sourceSets.testmod
+        }
+        main {
+          source sourceSets.main
+        }
+      }
     }
     testmodServer {
       server()
       name = "Testmod Server"
       source sourceSets.testmod
+      mods {
+        testmod {
+          source sourceSets.testmod
+        }
+        main {
+          source sourceSets.main
+        }
+      }
     }
   }
+}
 
-  accessWidenerPath = file("src/main/resources/fantasy.accesswidener")
+architectury {
+  minecraft = rootProject.minecraft_version
+  platformSetupLoomIde()
+  forge()
 }
 
 repositories {
   maven { url = "https://maven.gegy.dev/" }
   maven { url = "https://maven.nucleoid.xyz/" }
+  maven { url "https://maven.su5ed.dev/releases" }
+}
+
+
+loom {
+  silentMojangMappingsLicense()
 }
 
 dependencies {
   minecraft "com.mojang:minecraft:${project.minecraft_version}"
   mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-  modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+  forge "net.minecraftforge:forge:${forge_version}"
 
-  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+  modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-api:0.91.0+1.10.8+1.20.1")
+  modRuntimeOnly("dev.su5ed.sinytra.fabric-api:fabric-api:0.91.0+1.10.8+1.20.1")
 
   modLocalRuntime "eu.pb4:polymer-reg-sync-manipulator:0.5.5+1.20.1"
 
   testmodImplementation sourceSets.main.output
 }
 
+loom {
+  silentMojangMappingsLicense()
+}
+
 processResources {
   inputs.property "version", project.version
 
-  filesMatching("fabric.mod.json") {
+  filesMatching("META-INF/mods.toml") {
     expand "version": project.version
   }
 }

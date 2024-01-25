@@ -2,6 +2,7 @@ package xyz.nucleoid.fantasy;
 
 import com.google.common.base.Preconditions;
 import net.fabricmc.fabric.api.util.TriState;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -147,6 +148,29 @@ public final class RuntimeWorldConfig {
     private RegistryEntry<DimensionType> resolveDimensionType(MinecraftServer server) {
         var dimensionType = this.dimensionType;
         if (dimensionType == null) {
+            Registry<DimensionType> dimensionTypes = server.getRegistryManager().get(RegistryKeys.DIMENSION_TYPE);
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
+            System.out.println("dimensionTypes = " + dimensionTypes.getClass().getName());
             dimensionType = server.getRegistryManager().get(RegistryKeys.DIMENSION_TYPE).getEntry(this.dimensionTypeKey).orElse(null);
             Preconditions.checkNotNull(dimensionType, "invalid dimension type " + this.dimensionTypeKey);
         }
